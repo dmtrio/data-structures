@@ -17,7 +17,6 @@ var LinkedList = function() {
 
   list.removeHead = function() {
     var tempHead = list.head.value;
-    console.log(JSON.stringify(list.head.next));
     list.head = list.head.next;
     return tempHead;
   };
