@@ -13,7 +13,7 @@
 
 var LimitedArray = function(limit) {
   var storage = [];
-
+  
   var limitedArray = {};
   limitedArray.get = function(index) {
     checkLimit(index);
@@ -37,7 +37,7 @@ var LimitedArray = function(limit) {
       throw new Error('Error trying to access an over-the-limit index');
     }
   };
-
+  
   return limitedArray;
 };
 
