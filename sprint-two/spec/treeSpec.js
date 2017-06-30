@@ -41,4 +41,15 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should give the parent of a given child value', function() {
+    tree.addChild(4);
+    tree.addChild(9);
+    tree.addChild(11);
+    tree.addChild(2);
+    tree.children[0].addChild(6);
+    tree.children[2].addChild(3);
+    expect(JSON.stringify(tree.retrieve(3))).to.equal('{"value":11,"children":[{"value":3,"children":[]}]}');
+    expect(tree.retrieve(8)).to.equal('Not found!');
+  });
+  
 });

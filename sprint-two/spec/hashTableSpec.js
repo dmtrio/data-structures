@@ -46,6 +46,15 @@ describe('hashTable', function() {
     expect(hashTable.retrieve(v2)).to.equal(v2);
     window.getIndexBelowMaxForKey = oldHashFunction;
   });
+  
+  it('should not overwrite different keys that have the same value', function() {
+    hashTable.insert('Will', 'Williamson');
+    hashTable.insert('Bill', 'Williamson');
+    hashTable.insert('Jill', 'Williamson');
+    expect(hashTable.retrieve('Will')).to.equal('Williamson');
+    expect(hashTable.retrieve('Bill')).to.equal('Williamson');
+    expect(hashTable.retrieve('Jill')).to.equal('Williamson');
+  });
 
   // (Advanced! Remove the extra "x" when you want the following tests to run)
   xit ('should double in size when needed', function() {

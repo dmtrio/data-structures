@@ -2,6 +2,9 @@ var BinarySearchTree = function(value) {
   var searchTree = {};
   var treeItems = []; 
   searchTree.insert = function(value) {
+    if (typeof value !== 'number') {
+      return;
+    }
     treeItems.push(value);
     var toTree = function(value, tree) {
       if (!tree.value) {
@@ -18,9 +21,14 @@ var BinarySearchTree = function(value) {
         toTree(value, tree.right);
       }
     };
+    debugger;
     toTree(value, searchTree);
+    
   };
   searchTree.contains = function(value) {
+    if (typeof value !== 'number') {
+      return false;
+    }
     var search = function(value, tree) {
       if (tree === undefined) {
         return false;
@@ -32,6 +40,8 @@ var BinarySearchTree = function(value) {
         return search(value, tree.right);
       }
     };
+ 
+
     
     return search(value, this);
   };
