@@ -51,5 +51,14 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
+  it('should find a value that is not head or tail', function() {
+    linkedList.addToTail(1);
+    linkedList.addToTail(5);
+    linkedList.addToTail(4);
+    linkedList.addToTail(2);
+    linkedList.addToTail(6);
+    linkedList.addToTail(3);
+    expect(linkedList.contains(2)).to.equal(true);
+  });
   // add more tests here to test the functionality of linkedList
 });
