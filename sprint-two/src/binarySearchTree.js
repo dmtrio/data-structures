@@ -21,7 +21,6 @@ var BinarySearchTree = function(value) {
         toTree(value, tree.right);
       }
     };
-    debugger;
     toTree(value, searchTree);
     
   };
