@@ -23,5 +23,12 @@ describe('set', function() {
     set.remove('Mel Gibson');
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
-
+  
+  it('should have unique values', function() {
+    set.add('Gordon Ramsay');
+    set.add('Chef Boyardee');
+    set.add('Gordon Ramsay');
+    expect(set._storage[2]).to.equal(undefined);
+  });
+  
 });
