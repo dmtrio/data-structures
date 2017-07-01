@@ -66,7 +66,6 @@ Graph.prototype.forEachNode = function(cb) {
   for (var key in this) {
     if (!isNaN(key)) {
       cb(this[key].value);
-      console.log(JSON.stringify(cb(this[key].value)), this[key].value);
     } 
   }
   
