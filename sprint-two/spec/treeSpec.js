@@ -63,4 +63,25 @@ describe('tree', function() {
     expect(tree.children[1][0]).to.equal(undefined);
   });
   
+  it('should traverse and execute functions on every value in the tree', function() {
+    var timesTwo = function(number) {
+      return number * 2;
+    };
+    tree.addChild(1);
+    tree.addChild(3);
+    tree.addChild(5);
+    tree.children[2].addChild(7);
+    tree.children[1].addChild(9);
+    tree.traverse(timesTwo);
+    expect(tree.contains(2)).to.equal(true);
+    expect(tree.contains(6)).to.equal(true);
+    expect(tree.contains(10)).to.equal(true);
+    expect(tree.contains(14)).to.equal(true);
+    expect(tree.contains(18)).to.equal(true);
+    expect(tree.contains(1)).to.equal(false);
+    expect(tree.contains(3)).to.equal(false);
+    expect(tree.contains(5)).to.equal(false);
+    expect(tree.contains(7)).to.equal(false);
+    expect(tree.contains(9)).to.equal(false);
+  });
 });
