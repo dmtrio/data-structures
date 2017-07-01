@@ -2,55 +2,57 @@ var LinkedList = function() {
   var list = {};
   list.head = null;
   list.tail = null;
-  var addEnds, removeEnd, directions;
-  
-  list.addToTail = function(value) {
-    ends = ['tail', 'head'];
-    directions = ['next', 'previous'];
-    addTo(value);
-  };
-  list.addToHead = function(value) {
-    ends = ['head', 'tail'];
-    directions = ['previous', 'next'];
-    addTo(value);
-  };
 
-  var addTo = function(value) {
-    if (list[ends[0]] === null && list[ends[1]] === null) {
-      list[ends[1]] = Node(value);
-      list[ends[0]] = list[ends[1]];
-    } else if (list[ends[0]] === list[ends[1]]) {
-      list[ends[0]] = Node(value);
-      list[ends[0]][directions[1]] = list[ends[1]];
-      list[ends[1]][directions[0]] = list[ends[0]];
+  list.addToTail = function(value) {
+    if (list.tail === null && list.head === null) {
+      list.head = Node(value);
+      list.tail = list.head;
+    } else if (list.tail === list.head) {
+      list.tail = Node(value);
+      list.tail.previous = list.head;
+      list.head.next = list.tail;
     } else {
-      list[ends[0]][directions[0]] = Node(value);
-      var tempEnd = list[ends[0]];
-      list[ends[0]] = list[ends[0]][directions[0]];
-      list[ends[0]][directions[1]] = tempEnd;
+      list.tail.next = Node(value);
+      var tempTail = list.tail;
+      list.tail = list.tail.next;
+      list.tail.previous = tempTail;
     }
   };
-  
+  list.addToHead = function(value) {
+    if (list.head === null && list.tail === null) {
+      list.tail = Node(value);
+      list.head = list.tail;
+    } else if (list.head === list.tail) {
+      list.head = Node(value);
+      list.head.next = list.tail;
+      list.tail.previous = list.head;
+    } else {
+      list.head.previous = Node(value);
+      var tempHead = list.head;
+      list.head = list.head.previous;
+      list.head.next = tempHead;
+    }
+  };
+
   list.removeHead = function() {
-    removeEnd = 'head';
-    directions = ['previous', 'next'];
-    return remove();
+    var tempHead = list.head.value;
+    list.head = list.head.next;
+    if (list.head && list.head.previous !== null) {
+      
+      list.head.previous = null;
+    }
+    return tempHead;
   };
   
   
   list.removeTail = function() {
-    removeEnd = 'tail';
-    directions = ['next', 'previous'];
-    return remove();
-  };
-  
-  var remove = function() {
-    var tempEnd = list[removeEnd].value;
-    list[removeEnd] = list[removeEnd][directions[1]];
-    if (list[removeEnd] && list[removeEnd][directions[0]] !== null) {
-      list[removeEnd][directions[0]] = null;
+    var tempTail = list.tail.value;
+    list.tail = list.tail.previous;
+    if (list.tail && list.tail.next !== null) {
+      
+      list.tail.next = null;
     }
-    return tempEnd;
+    return tempTail;
   };
 
   list.contains = function(target) {
