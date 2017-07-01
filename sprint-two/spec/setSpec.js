@@ -30,5 +30,19 @@ describe('set', function() {
     set.add('Gordon Ramsay');
     expect(set._storage[2]).to.equal(undefined);
   });
+  it('should handle values of all types', function() {
+    set.add('Mrs. O\'Leary\'s Cow');
+    set.add(1871);
+    set.add({'city': 'Chicago', 'status': 'On Fire'});
+    set.add(['London', 'White House', 'Chicago', 'Vietnam']);
+    set.add(true);
+    set.add(null);
+    expect(set._storage[0]).to.equal('Mrs. O\'Leary\'s Cow');
+    expect(set._storage[1]).to.equal(1871);
+    expect(JSON.stringify(set._storage[2])).to.equal('{"city":"Chicago","status":"On Fire"}');
+    expect(JSON.stringify(set._storage[3])).to.equal('["London","White House","Chicago","Vietnam"]');
+    expect(set._storage[4]).to.equal(true);
+    expect(set._storage[5]).to.equal(null);
+  });
   
 });
